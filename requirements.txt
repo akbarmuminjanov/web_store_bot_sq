@@ -1,0 +1,6 @@
+aiogram==2.25
+environs
+pillow
+psycopg2-binary
+django
+asyncpg
