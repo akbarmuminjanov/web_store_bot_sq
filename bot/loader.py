@@ -7,8 +7,9 @@ import os
 current_directory = os.getcwd()
 
 parent_directory = os.path.dirname(current_directory)
+PROXY_URL = "http://proxy.server:3128"
 
-bot = Bot(token=config.BOT_TOKEN, parse_mode=types.ParseMode.HTML)
+bot = Bot(token=config.BOT_TOKEN, parse_mode=types.ParseMode.HTML, proxy=PROXY_URL)
 storage = MemoryStorage()
 dp = Dispatcher(bot, storage=storage)
 db = Database()
