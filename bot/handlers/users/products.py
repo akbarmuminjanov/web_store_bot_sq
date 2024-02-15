@@ -83,12 +83,21 @@ async def show_products(call: types.CallbackQuery, callback_data: dict):
     keyboard =  shopping_keyboard(product[0], call.from_user.id, subcategory_id=product[6])
     await call.message.delete()
 
+    product_image = product[-1]
+
+    product_url = "http://webstorebot.pythonanywhere.com/media/" + str(product_image)
+
     if product[5] == True:
         await call.message.answer_photo(product[1], caption=text, reply_markup=keyboard)
     elif product[5] == False:
         bot = await call.message.answer_photo(product[1], caption=text)
         await asyncio.sleep(60)
         await bot.delete()
+
+    try:
+        await call.message.answer_photo(product_url, caption=text, reply_markup=keyboard)
+    except:
+        await call.message.answer_photo(product_image,caption=text, reply_markup=keyboard)
 
 @dp.callback_query_handler(shopping_callback.filter())
 async def add_to_cart(call: types.CallbackQuery, callback_data: dict):
