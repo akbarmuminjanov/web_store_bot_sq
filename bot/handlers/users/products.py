@@ -80,7 +80,7 @@ async def show_products(call: types.CallbackQuery, callback_data: dict):
     elif product[5] == False:
         text +=f"<b>❌mahsulot tugadi</b>"
 
-    keyboard =  shopping_keyboard(product[0], call.from_user.id, subcategory_id=product[6])
+    keyboard =  shopping_keyboard(product[0], call.from_user.id, subcategory_id=product[5])
     await call.message.delete()
 
     product_image = product[-1]
