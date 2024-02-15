@@ -94,10 +94,10 @@ async def show_products(call: types.CallbackQuery, callback_data: dict):
         await asyncio.sleep(60)
         await bot.delete()
 
-    try:
-        await call.message.answer_photo(product_url, caption=text, reply_markup=keyboard)
-    except:
-        await call.message.answer_photo(product_image,caption=text, reply_markup=keyboard)
+    # try:
+    #     await call.message.answer_photo(product_url, caption=text, reply_markup=keyboard)
+    # except:
+    #     await call.message.answer_photo(product_image,caption=text, reply_markup=keyboard)
 
 @dp.callback_query_handler(shopping_callback.filter())
 async def add_to_cart(call: types.CallbackQuery, callback_data: dict):
