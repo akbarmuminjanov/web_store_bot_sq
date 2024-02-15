@@ -97,8 +97,7 @@ async def show_products(call: types.CallbackQuery, callback_data: dict):
     try:
         await call.message.answer_photo(product_url, caption=text, reply_markup=keyboard)
     except:
-        pass
-    #     await call.message.answer_photo(product_image,caption=text, reply_markup=keyboard)
+        await call.message.answer_photo(product_image,caption=text, reply_markup=keyboard)
 
 @dp.callback_query_handler(shopping_callback.filter())
 async def add_to_cart(call: types.CallbackQuery, callback_data: dict):
