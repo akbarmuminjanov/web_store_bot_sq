@@ -75,9 +75,9 @@ async def show_products(call: types.CallbackQuery, callback_data: dict):
     text +=f"<b>📔mahsulot haqida: {product[2]}</b>\n\n"
     text +=f"<b>💸mahsulot narxi: {product[3]} ming so'm</b>\n\n"
 
-    if product[5] == True:
+    if product[4] == True:
         text +=f"<b>✅mahsulot bor</b>"
-    elif product[5] == False:
+    elif product[4] == False:
         text +=f"<b>❌mahsulot tugadi</b>"
 
     keyboard =  shopping_keyboard(product[0], call.from_user.id, subcategory_id=product[5])
@@ -88,9 +88,9 @@ async def show_products(call: types.CallbackQuery, callback_data: dict):
     product_url = "http://webstorebot.pythonanywhere.com/media/" + str(product_image)
 
     if product[4] == True:
-        await call.message.answer_photo(product[1], caption=text, reply_markup=keyboard)
+        await call.message.answer_photo(product[-1], caption=text, reply_markup=keyboard)
     elif product[4] == False:
-        bot = await call.message.answer_photo(product[1], caption=text)
+        bot = await call.message.answer_photo(product[-1], caption=text)
         await asyncio.sleep(60)
         await bot.delete()
 
