@@ -88,9 +88,9 @@ async def show_products(call: types.CallbackQuery, callback_data: dict):
     product_url = "http://webstorebot.pythonanywhere.com/media/" + str(product_image)
 
     if product[4] == True:
-        await call.message.answer_photo(product[-1], caption=text, reply_markup=keyboard)
+        await call.message.answer_photo(product_url, caption=text, reply_markup=keyboard)
     elif product[4] == False:
-        bot = await call.message.answer_photo(product[-1], caption=text)
+        bot = await call.message.answer_photo(product_url, caption=text)
         await asyncio.sleep(60)
         await bot.delete()
 
