@@ -129,9 +129,9 @@ async def show_cart(message: types.Message):
     for product in products:
         pr = db.select_product(id=str(product[2]))
         text += f"<b>{counter}.📍Nomi: {pr[2]}</b>\n"
-        text += f"<b>  💸Narxi: {pr[4]} ming so'm</b>\n\n"
+        text += f"<b>  💸Narxi: {pr[3]} ming so'm</b>\n\n"
         counter += 1
-        total_price += pr[4]
+        total_price += pr[3]
 
     text += "Jami:  \n"
     text += f"Mahsulotlar soni: {counter -1}\n"
