@@ -14,7 +14,7 @@ async def subcategories_keyboard(subcategories):
     for i in subcategories:
         button_text = i[1]
 
-        callback_data = sub_category_callback.new(category=i[2], id=i[0])
+        callback_data = sub_category_callback.new(category=str(i[2]), id=str(i[0]))
         markup.insert(
             InlineKeyboardButton(text=button_text, callback_data=callback_data)
         )

@@ -63,7 +63,7 @@ async def back_menu(call: types.CallbackQuery, callback_data: dict):
     await call.message.answer(text="Mahsulot tanlang:", reply_markup=button, )
 
 #==================================================================================
-# 29:11
+
 
 @dp.callback_query_handler(product_callback.filter())
 async def show_products(call: types.CallbackQuery, callback_data: dict):
