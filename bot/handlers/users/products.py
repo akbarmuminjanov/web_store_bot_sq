@@ -115,7 +115,7 @@ async def add_to_cart(call: types.CallbackQuery, callback_data: dict):
     await call.message.delete()
     await call.message.answer("Menyu tanlang", reply_markup=menu)
 
-@dp.message_handler(Text(equals='🛒savatcha'))
+@dp.message_handler(Text(equals='🛒корзинаa'))
 async def show_cart(message: types.Message):
     user_id = message.from_user.id
     await message.delete()
