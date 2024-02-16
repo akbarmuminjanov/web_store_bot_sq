@@ -4,8 +4,8 @@ menu = ReplyKeyboardMarkup(
     keyboard= [
         [
             KeyboardButton(text="📃katalog"),
-            KeyboardButton(text="🛒savatcha"),
-            KeyboardButton(text="⏳mening buyurtmalarim"),
+            KeyboardButton(text="🛒корзина"),
+            KeyboardButton(text="⏳история заказов"),
         ]
     ],
     resize_keyboard=True

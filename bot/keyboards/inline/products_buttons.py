@@ -22,7 +22,7 @@ async def subcategories_keyboard(subcategories):
     
     markup.row(
         InlineKeyboardButton(
-            text="⬅️Orqaga", callback_data=back_callback.new(category_id=0, subcategory_id=0))
+            text="⬅️ назад", callback_data=back_callback.new(category_id=0, subcategory_id=0))
         )
     return markup
 
@@ -40,7 +40,7 @@ def products_keyboard(products, category_id):
 
     markup.row(
         InlineKeyboardButton(
-            text="⬅️Orqaga", callback_data=back_callback.new(category_id=category_id, subcategory_id=0))
+            text="⬅️ назад", callback_data=back_callback.new(category_id=category_id, subcategory_id=0))
         )
     return markup
 
@@ -55,7 +55,7 @@ def shopping_keyboard(product_id, user_id, subcategory_id):
 
     markup.row(
         InlineKeyboardButton(
-            text="⬅️Orqaga", callback_data=back_callback.new(category_id=0, subcategory_id=subcategory_id))
+            text="⬅️ назад", callback_data=back_callback.new(category_id=0, subcategory_id=subcategory_id))
         )
     return markup
 
@@ -70,7 +70,7 @@ async def buy_product(total_price, description):
 
     markup.insert(
         InlineKeyboardButton(
-            text="⬅️Orqaga", callback_data=back_callback.new(category_id=0, subcategory_id=0))
+            text="⬅️ назад", callback_data=back_callback.new(category_id=0, subcategory_id=0))
     )
 
     return markup
@@ -80,5 +80,5 @@ back_button = InlineKeyboardMarkup(row_width=1)
 
 back_button.insert(
     InlineKeyboardButton(
-        text="⬅️Orqaga", callback_data=back_callback.new(category_id=0, subcategory_id=0))
+        text="⬅️ назад", callback_data=back_callback.new(category_id=0, subcategory_id=0))
 )

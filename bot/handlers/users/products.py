@@ -30,7 +30,7 @@ async def show_subcategory(message: types.Message):
         button = await subcategories_keyboard(subcategories)
 
         await message.delete()
-        await message.answer("Kategoriya tanlang ⬇️", reply_markup=button)
+        await message.answer("выберите категорию ⬇️", reply_markup=button)
 
     except Exception as err:
         print(err)
@@ -121,21 +121,21 @@ async def show_cart(message: types.Message):
     await message.delete()
 
     products = db.select_user_products(user_id=str(user_id))
-    main_text = f"<b>Savatdagi tovarlar: </b>\n\n"
+    main_text = f"<b>товары в корзине: </b>\n\n"
     text = ""
     counter = 1
     total_price = 0
 
     for product in products:
-        pr = db.select_product(id=str(product[1]))
-        text += f"<b>{counter}.📍Nomi: {pr[1]}</b>\n"
-        text += f"<b>  💸Narxi: {pr[3]} ming so'm</b>\n\n"
+        pr = db.select_product(id=str(product[2]))
+        text += f"<b>{counter}.📍имя: {pr[1]}</b>\n"
+        text += f"<b>  💸цена: {pr[3]} ming so'm</b>\n\n"
         counter += 1
         total_price += pr[3]
 
-    text += "Jami:  \n"
-    text += f"Mahsulotlar soni: {counter -1}\n"
-    text += f"Jami: {total_price} ming so'm"
+    text += "Oбщий:  \n"
+    text += f"Kоличество продуктов: {counter -1}\n"
+    text += f"Oбщий: {total_price} ming so'm"
 
 
     button = await buy_product(total_price, "This is our products")
@@ -147,16 +147,16 @@ async def send_invoice(call: types.CallbackQuery, callback_data:dict):
     await call.answer()
 
     product = Product(
-        title="Savatchadagi mahsulotlar ro'yhati",
+        title="список товаров в корзине",
         description=callback_data['description'],
         currency="UZS",
         prices=[
             LabeledPrice(
-                label='Mahsulotlar',
+                label='продукты',
                 amount=int(callback_data['total_price']+"00")
             ),
             LabeledPrice(
-                label='Yetkazib berish (20-25 kun)',
+                label='доставка в течени (20-25 kun)',
                 amount=1000000, #10.000 so'm
             ),
         ],
@@ -169,7 +169,6 @@ async def send_invoice(call: types.CallbackQuery, callback_data:dict):
 
 
     await bot.send_invoice(chat_id=call.from_user.id, **product.generate_invoice(), payload="cart_shop")
-
 
 @dp.shipping_query_handler()
 async def choose_shipping(query: types.ShippingQuery):
@@ -209,18 +208,17 @@ async def process_pre_checkout_query(pre_checkout_query: types.PreCheckoutQuery)
 
     db.clear_user_cart(pre_checkout_query.from_user.id)
 
-@dp.message_handler(Text(equals="⏳mening buyurtmalarim"))
+@dp.message_handler(Text(equals="⏳история заказов"))
 async def show_history(message: types.Message):
     await message.delete()
     histories = db.select_user_histories(user_id=message.from_user.id)
 
-    text = "<b>Sizning buyurmalar tarxingiz</b>\n\n"
+    text = "<b>Bаша история заказов</b>\n\n"
     
     for i in histories:
-        text += f"Buyurtma vaqti: {i[1]}\nStatus: {i[2]}\n\n"
+        text += f"Bремя заказов: {i[1]}\nStatus: {i[2]}\n\n"
 
     await message.answer(text, reply_markup=back_button)
-
 
 @dp.callback_query_handler(back_callback.filter())
 async def hendler_back_buttons(call: types.CallbackQuery, callback_data:dict):
@@ -235,7 +233,7 @@ async def hendler_back_buttons(call: types.CallbackQuery, callback_data:dict):
 
         button = await subcategories_keyboard(subcategories)
 
-        await call.message.edit_text("Kategoriya tanlang ⬇️", reply_markup=button)
+        await call.message.edit_text("выберите категорию ⬇️", reply_markup=button)
 
     elif subcategory_id != 0:
         products = db.select_products(sub_category_id=str(subcategory_id))
@@ -244,4 +242,4 @@ async def hendler_back_buttons(call: types.CallbackQuery, callback_data:dict):
         button =  products_keyboard(products, category_id=subcat[2])
 
         await call.message.delete()
-        await call.message.answer("Mahsulot tanlang ⬇️", reply_markup=button)
+        await call.message.answer("выберите продукт ⬇️", reply_markup=button)
