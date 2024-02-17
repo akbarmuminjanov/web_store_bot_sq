@@ -19,7 +19,7 @@ async def bot_start(message: types.Message):
     except:
         user = db.select_user(id=message.from_user.id)
 
-    await message.answer("Xush kelibsiz!", reply_markup=menu)
+    await message.answer("Добро пожаловать!", reply_markup=menu)
 
     count = db.count_users()
     msg = f"{user[0]} bazaga qo'shildi.\nBazada {count} ta foydalanuvchi bor."

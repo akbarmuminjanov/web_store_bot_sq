@@ -17,7 +17,7 @@ async def show_category(message: types.Message):
     button = await category_buttons(categories)
 
     await message.delete()
-    await message.answer(f"kategoriya tanglang ⬇️", reply_markup=button)
+    await message.answer(f"Выберите категорию ⬇️", reply_markup=button)
 
 @dp.message_handler(Text(startswith="🌀"))
 async def show_subcategory(message: types.Message):
@@ -106,14 +106,14 @@ async def add_to_cart(call: types.CallbackQuery, callback_data: dict):
 
     status = db.add_product_to_cart(user_id, product_id)
     if status == "error":
-        await call.answer("🚫 Mahsulot qo'shib bo'lmadi")
+        await call.answer("🚫 Не удалось добавить товар")
 
     elif status == "added-before":
-        await call.answer("‼️ Mahsulot oldin qo'shilgan")
+        await call.answer("‼️ Товар добавлен ранее")
 
-    await call.answer(" ✅ Mahsulot savatga qo'shidi ")
+    await call.answer(" ✅ Товар добавлен в корзину ")
     await call.message.delete()
-    await call.message.answer("Menyu tanlang", reply_markup=menu)
+    await call.message.answer("Выберите меню", reply_markup=menu)
 
 @dp.message_handler(Text(equals='🛒корзина'))
 async def show_cart(message: types.Message):
@@ -194,7 +194,7 @@ async def process_pre_checkout_query(pre_checkout_query: types.PreCheckoutQuery)
                                         ok=True)
 
     await bot.send_message(chat_id=pre_checkout_query.from_user.id,
-                           text="Xaridingiz uchun rahmat!")
+                           text="Cпасибо за покупку!")
 
     await bot.send_message(chat_id=ADMINS[0],
                            text=f"Quyidagi mahsulot sotildi: {pre_checkout_query.invoice_payload}\n"
