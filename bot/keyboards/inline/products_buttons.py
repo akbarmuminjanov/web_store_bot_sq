@@ -65,7 +65,7 @@ async def buy_product(total_price, description):
     callback_data = buy_product_callback.new(total_price=total_price, description=description)
 
     markup.insert(
-        InlineKeyboardButton(text="Xarid qilish", callback_data=callback_data)
+        InlineKeyboardButton(text="купить", callback_data=callback_data)
     )
 
     markup.insert(
