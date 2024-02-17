@@ -50,7 +50,7 @@ def shopping_keyboard(product_id, user_id, subcategory_id):
     callback_data = shopping_callback.new(product_id=product_id, user_id=user_id)
 
     markup.insert(
-        InlineKeyboardButton("Savatga qo'shish 🛒", callback_data=callback_data)
+        InlineKeyboardButton("добавить в корзину🛒", callback_data=callback_data)
     )
 
     markup.row(

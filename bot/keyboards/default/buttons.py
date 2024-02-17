@@ -24,7 +24,7 @@ async def category_buttons(categories):
             keyboard.append([KeyboardButton(f'🌀 {i[1]}')])
         
     keyboard.append([
-         KeyboardButton("◀️ Orqaga")
+         KeyboardButton("◀️ Назад")
     ])
 
     cats = ReplyKeyboardMarkup(keyboard=keyboard, resize_keyboard=True)

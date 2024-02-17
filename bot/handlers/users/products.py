@@ -34,13 +34,13 @@ async def show_subcategory(message: types.Message):
 
     except Exception as err:
         print(err)
-        await message.answer("Noto'g'ri kategoriya")
+        await message.answer("Неверная категория")
     
 
-@dp.message_handler(Text(equals='◀️ Orqaga'))
+@dp.message_handler(Text(equals='◀️ Назад'))
 async def back_catalog(message: types.Message):
     await message.delete()
-    await message.answer(f"Siz bosh menyudasiz ⬇️", reply_markup=menu)
+    await message.answer(f"Вы в главном меню ⬇️", reply_markup=menu)
 
 #===============================================================================
 
@@ -60,7 +60,7 @@ async def back_menu(call: types.CallbackQuery, callback_data: dict):
 
     products = db.select_products(sub_category_id=subcategory_id)
     button =  products_keyboard(products, category_id=subcat[2])
-    await call.message.answer(text="Mahsulot tanlang:", reply_markup=button, )
+    await call.message.answer(text="Выберите продукт:", reply_markup=button, )
 
 #==================================================================================
 
@@ -71,14 +71,14 @@ async def show_products(call: types.CallbackQuery, callback_data: dict):
 
     product = db.select_product(id=str(callback_data['id']))
 
-    text = f"<b>📍nomi: {product[1]}</b>\n\n"
-    text +=f"<b>📔mahsulot haqida: {product[2]}</b>\n\n"
-    text +=f"<b>💸mahsulot narxi: {product[3]} ming so'm</b>\n\n"
+    text = f"<b>📍название: {product[1]}</b>\n\n"
+    text +=f"<b>📔о продукте: {product[2]}</b>\n\n"
+    text +=f"<b>💸цена: {product[3]} ming so'm</b>\n\n"
 
     if product[4] == True:
-        text +=f"<b>✅mahsulot bor</b>"
+        text +=f"<b>✅в наличии</b>"
     elif product[4] == False:
-        text +=f"<b>❌mahsulot tugadi</b>"
+        text +=f"<b>❌товара нет в наличии</b>"
 
     keyboard =  shopping_keyboard(product[0], call.from_user.id, subcategory_id=product[5])
     await call.message.delete()
