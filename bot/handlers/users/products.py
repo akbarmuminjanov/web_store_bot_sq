@@ -11,7 +11,7 @@ from data.shipping_methods import *
 from data.config import ADMINS
 
 
-@dp.message_handler(text="📃katalog")
+@dp.message_handler(text="📃 каталог")
 async def show_category(message: types.Message):
     categories = db.select_all_categories()
     button = await category_buttons(categories)
