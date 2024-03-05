@@ -1,5 +1,5 @@
 from django.db import models
-
+from .utils import create_new_id
 # Create your models here.
 
 STATUS_CHOICES=(
@@ -28,6 +28,7 @@ class Product(models.Model):
     sub_category = models.ForeignKey(SubCategory, on_delete=models.CASCADE)
 
     image = models.ImageField(upload_to="product_images/")
+    product_id = models.CharField(max_length= 10, editable=False, unique=True, default=create_new_id)
     name = models.CharField(max_length=255)
     description = models.TextField()
     price = models.PositiveBigIntegerField()

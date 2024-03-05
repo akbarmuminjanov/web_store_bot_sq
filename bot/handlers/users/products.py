@@ -71,13 +71,14 @@ async def show_products(call: types.CallbackQuery, callback_data: dict):
 
     product = db.select_product(id=str(callback_data['id']))
 
-    text = f"<b>📍название: {product[1]}</b>\n\n"
-    text +=f"<b>📔о продукте: {product[2]}</b>\n\n"
-    text +=f"<b>💸цена: {product[3]} ming so'm</b>\n\n"
+    text = f"<code>ID продукта: {product[7]}</code>\n\n" 
+    text += f"<b>📍название: {product[2]}</b>\n\n"
+    text +=f"<b>📔о продукте: {product[3]}</b>\n\n"
+    text +=f"<b>💸цена: {product[4]} ming so'm</b>\n\n"
 
-    if product[4] == True:
+    if product[5] == True:
         text +=f"<b>✅в наличии</b>"
-    elif product[4] == False:
+    elif product[5] == False:
         text +=f"<b>❌товара нет в наличии</b>"
 
     keyboard =  shopping_keyboard(product[0], call.from_user.id, subcategory_id=product[5])
@@ -87,9 +88,9 @@ async def show_products(call: types.CallbackQuery, callback_data: dict):
 
     product_url = "http://webstorebot.pythonanywhere.com/media/" + str(product_image)
 
-    if product[4] == True:
+    if product[5] == True:
         await call.message.answer_photo(product_url, caption=text, reply_markup=keyboard)
-    elif product[4] == False:
+    elif product[5] == False:
         bot = await call.message.answer_photo(product_url, caption=text)
         await asyncio.sleep(60)
         await bot.delete()
@@ -128,8 +129,8 @@ async def show_cart(message: types.Message):
 
     for product in products:
         pr = db.select_product(id=str(product[2]))
-        text += f"<b>{counter}.📍название: {pr[1]}</b>\n"
-        text += f"<b>  💸цена: {pr[3]} ming so'm</b>\n\n"
+        text += f"<b>{counter}.📍название: {pr[2]}</b>\n"
+        text += f"<b>  💸цена: {pr[4]} ming so'm</b>\n\n"
         counter += 1
         total_price += pr[3]
 
