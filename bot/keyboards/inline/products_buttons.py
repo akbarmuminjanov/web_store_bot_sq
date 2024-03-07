@@ -30,7 +30,7 @@ def products_keyboard(products, category_id):
     markup = InlineKeyboardMarkup(row_width=2)
 
     for i in products:
-        button_text = i[1]
+        button_text = i[2]
 
         callback_data = product_callback.new(subcategory=i[5], id=i[0])
 

@@ -71,7 +71,7 @@ async def show_products(call: types.CallbackQuery, callback_data: dict):
 
     product = db.select_product(id=str(callback_data['id']))
 
-    text = f"<code>ID продукта: {product[7]}</code>\n\n" 
+    text = f"ID продукта: <code>{product[7]}</code>\n\n" 
     text += f"<b>📍название: {product[2]}</b>\n\n"
     text +=f"<b>📔о продукте: {product[3]}</b>\n\n"
     text +=f"<b>💸цена: {product[4]} ming so'm</b>\n\n"
@@ -84,7 +84,7 @@ async def show_products(call: types.CallbackQuery, callback_data: dict):
     keyboard =  shopping_keyboard(product[0], call.from_user.id, subcategory_id=product[5])
     await call.message.delete()
 
-    product_image = product[-1]
+    product_image = product[1]
 
     product_url = "http://webstorebot.pythonanywhere.com/media/" + str(product_image)
 
