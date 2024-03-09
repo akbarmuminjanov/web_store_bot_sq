@@ -132,7 +132,7 @@ async def show_cart(message: types.Message):
         text += f"<b>{counter}.📍название: {pr[2]}</b>\n"
         text += f"<b>  💸цена: {pr[4]} ming so'm</b>\n\n"
         counter += 1
-        total_price += pr[3]
+        total_price += pr[4]
 
     text += "Oбщий:  \n"
     text += f"Kоличество продуктов: {counter -1}\n"
