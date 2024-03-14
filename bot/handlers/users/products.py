@@ -71,10 +71,17 @@ async def show_products(call: types.CallbackQuery, callback_data: dict):
 
     product = db.select_product(id=str(callback_data['id']))
 
+    # text = f"ID продукта: <code>{product[7]}</code>\n\n" 
+    # text += f"<b>📍название: {product[2]}</b>\n\n"
+    # text +=f"<b>📔о продукте: {product[3]}</b>\n\n"
+    # text +=f"<b>💸цена: {product[4]} ming so'm</b>\n\n"
+
     text = f"ID продукта: <code>{product[7]}</code>\n\n" 
-    text += f"<b>📍название: {product[2]}</b>\n\n"
-    text +=f"<b>📔о продукте: {product[3]}</b>\n\n"
-    text +=f"<b>💸цена: {product[4]} ming so'm</b>\n\n"
+    text += f"<b>★{product[2]}★</b>\n\n"
+    text +=f"<b>✦ - 🏷 Размеры: {product[3]}</b>\n"
+    text +=f"<b>✦ - 💳 Цена : {product[4]} so'm</b>\n\n"
+
+    text +=f"<b>Oтправьте ID продукта чтобы купить @Priler_04</b>\n\n"
 
     if product[5] == True:
         text +=f"<b>✅в наличии</b>"

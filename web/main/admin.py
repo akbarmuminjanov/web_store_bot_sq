@@ -16,7 +16,7 @@ class SubcategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    fields = ['product_id', 'name', 'price', 'available']
+    fields = ['name', 'price', 'available']
     search_fields = ['product_id', 'name', 'price']
 
 
