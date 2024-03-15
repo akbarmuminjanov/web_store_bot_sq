@@ -18,5 +18,3 @@ class SubcategoryAdmin(admin.ModelAdmin):
 class ProductAdmin(admin.ModelAdmin):
     list_display = ['name', 'price', 'available']
     search_fields = ['product_id', 'name', 'price']
-
-
