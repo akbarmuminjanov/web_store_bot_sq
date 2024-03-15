@@ -88,12 +88,13 @@ async def show_products(call: types.CallbackQuery, callback_data: dict):
     elif product[5] == False:
         text +=f"<b>❌товара нет в наличии</b>"
 
-    keyboard =  shopping_keyboard(product[0], call.from_user.id, subcategory_id=product[5])
+    keyboard =  shopping_keyboard(product[0], call.from_user.id, subcategory_id=product[6])
     await call.message.delete()
 
     product_image = product[1]
 
-    product_url = "http://webstorebot.pythonanywhere.com/media/" + str(product_image)
+    # product_url = "http://webstorebot.pythonanywhere.com/media/" + str(product_image)
+    product_url = "https://70b8-94-158-62-108.ngrok-free.app/media/" + str(product_image)
 
     if product[5] == True:
         await call.message.answer_photo(product_url, caption=text, reply_markup=keyboard)
